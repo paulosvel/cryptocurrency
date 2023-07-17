@@ -1,6 +1,8 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import CoinItem from './CoinItem';
+import { Link } from 'react-router-dom';
+import Coin from '../routes/Coin';
 const Coins = (props) => {
   const coins = props.coins;
 
@@ -17,7 +19,9 @@ const Coins = (props) => {
         </Box>
         {props.coins.map(coins =>{
           return (
-            <CoinItem coins = {coins} key ={coins.id} />
+            <Link style={{textDecoration:"none"}} to={`/coin/${coins.id}`} element={<Coin />} key ={coins.id}>
+            <CoinItem coins = {coins}  />
+            </Link>
           )
         })}
       </Box>
