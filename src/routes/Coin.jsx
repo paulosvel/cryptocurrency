@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useParams} from 'react-router-dom';
 import DOMPurify from 'dompurify';
+import './CoinPaths.css';
 
 function Coin() {
   const [coin , setCoin] = useState ({});
@@ -20,27 +21,27 @@ function Coin() {
   }, [])
   return (
     <Box>
-<Box>
+<Box sx={{maxWidth:"750px", margin:"1rem auto", padding:".7rem 1rem", display:"flex", flexDirection:"column", backgroundColor:"#26272b", boxShadow:"0 0 12px #18191b", borderRadius:"8px"}}>
   <Box>
     <h1>{coin.name}</h1>
   </Box>
   <Box>
-    <Box>
-      <span>Rank #{coin.market_cap_rank}</span>
+    <Box >
+      <span style={{border:"1px solid purple", boxShadow:"0 0 8px purple", backgroundColor:"purple", borderRadius:"8px", padding:"5px"}}>Rank #{coin.market_cap_rank}</span>
     </Box>
-    <Box>
-      <Box>
+    <Box sx={{display:"grid", gridTemplateColumns:"repeat(2,1fr)"}}>
+      <Box sx={{display:"flex", alignItems:"center", margin:"15px 0px", gap:"12px"}}>
         {coin.image ? <img src={coin.image.small} /> :null}
       <p>{coin.name}</p>
       <p>{coin.symbol}</p>        
       </Box>
-      <Box>
+      <Box sx={{display:"flex", alignItems:"center", justifyContent:"center"}}>
       {coin.market_data?.current_price ? <h1>${coin.market_data.current_price.eur.toLocaleString()}</h1> : null}
       </Box>
     </Box>
   </Box>
 
-  <Box>
+  <Box sx={{maxWidth:"750px", margin:"2rem auto", padding:".6rem 1rem", display:"flex", flexDirection:"column", backgroundColor:"#26272b", boxShadow:"0 0 12px #18191b", borderRadius:"8px", width:"80%"}}>
     <table>
       <thead>
         <tr>
@@ -64,28 +65,28 @@ function Coin() {
       </tbody>
     </table>
   </Box>
-  <Box>
+  <Box >
+    <Box sx={{maxWidth:"750px", margin:"2rem auto", padding:".6rem 1rem", display:"flex", flexDirection:"row", justifyContent:"space-between",gap:"20px", backgroundColor:"#26272b", boxShadow:"0 0 12px #18191b", borderRadius:"8px",width:"60%",textAlign:"center"}}>
     <Box>
-    <Box>
-      <Box>
+      <Box sx={{borderBottom:"1px solid white"}}  >
 <h4>24 Hour Low</h4>
 {coin.market_data?.low_24h ? <p>${coin.market_data.low_24h.eur.toLocaleString()}</p> : null}
 </Box>
-<Box>
+<Box sx={{borderBottom:"1px solid white"}}>
 <h4>24 Hour High</h4>
 {coin.market_data?.high_24h ? <p>{coin.market_data.high_24h.eur.toLocaleString()}</p> : null}
 </Box>
     </Box>
     <Box>
-    <Box>
+    <Box sx={{borderBottom:"1px solid white"}}>
 <h4>Market Cap</h4>
 
 {coin.market_data?.market_cap ? <p>${coin.market_data.market_cap.eur.toLocaleString()}</p> : null}
 
 </Box>
-<Box>
+<Box sx={{borderBottom:"1px solid white"}}>
 <h4>Circulating Supply</h4>
-{coin.market_data ? <p>{coin.market_data.circulating_supply}</p> : null}
+{coin.market_data ? <p>{coin.market_data.circulating_supply.toLocaleString()}</p> : null}
 </Box>
     </Box>
 
@@ -93,8 +94,8 @@ function Coin() {
   </Box>
 
   <Box>
-    <Box>
-      <h3>About</h3>
+    <Box sx={{ margin:"1rem 0", textAlign:"left"}}>
+      <h3 style={{textAlign:"center"}}>About</h3>
       <p dangerouslySetInnerHTML={{
         __html: DOMPurify.sanitize(coin.description ? coin.description.en : ''),
        }}>
