@@ -3,3 +3,16 @@
   transition: .3s ease-in-out;
   cursor: pointer;
 }
+
+.navbar{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+  font-size: 35px;
+}

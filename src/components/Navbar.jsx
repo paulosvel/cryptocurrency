@@ -6,8 +6,8 @@ function Navbar() {
   return (
     <Link style={{textDecoration:"none"}} to="/">
 
-      <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", gap:"1px"}}>
-        <FaCoins style={{color:"purple" , fontSize:"40px"}} />
+      <Box className="navbar" sx={{display:"flex", justifyContent:"center", alignItems:"center",fontSize:"25px"}}>
+        <FaCoins style={{color:"purple" , fontSize:"70px",}} />
         <h1>Coin <span style={{color:"purple"}}>Search</span></h1>
       </Box>
     </Link>
