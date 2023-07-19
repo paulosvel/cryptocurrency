@@ -10,12 +10,12 @@ const Search = (props) => {
   return (
     <Box className="navbar">
       <TextField
-  placeholder="Search Bar"
 
         value={props.searchTerm}
         onChange={handleChange}
-        sx={{ backgroundColor: '#800080', width:"15%" }}
-        variant="filled"
+        sx={{ backgroundColor: '#800080' }}
+        label="Search"
+        size='small'
       />
     </Box>
   );
