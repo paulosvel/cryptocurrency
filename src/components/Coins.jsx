@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import CoinItem from './CoinItem';
 import { Link } from 'react-router-dom';
 import Coin from '../routes/Coin';
@@ -7,10 +7,20 @@ import Search from './Search';
 
 const Coins = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [displayedCoins, setDisplayedCoins] = useState(10);
 
   const handleChange = (search) => {
     setSearchTerm(search);
   };
+
+  const handleLoadMore = () => {
+    setDisplayedCoins(prevDisplayedCoins => prevDisplayedCoins + 10);
+  };
+
+  const filteredCoins = props.coins.filter(
+    (coin) =>
+      !searchTerm || coin.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -36,24 +46,22 @@ const Coins = (props) => {
             <p>Volume</p>
             <p>Market Cap</p>
           </Box>
-          {props.coins.map((coin) => {
-            if (
-              !searchTerm ||
-              coin.name.toLowerCase().includes(searchTerm.toLowerCase())
-            ) {
-              return (
-                <Link
-                  style={{ textDecoration: 'none' }}
-                  to={`/coin/${coin.id}`}
-                  key={coin.id}
-                >
-                  <CoinItem coins={coin} />
-                </Link>
-              );
-            } else {
-              return null;
-            }
-          })}
+          {filteredCoins.slice(0, displayedCoins).map((coin) => (
+            <Link
+              style={{ textDecoration: 'none' }}
+              to={`/coin/${coin.id}`}
+              key={coin.id}
+            >
+              <CoinItem coins={coin} />
+            </Link>
+          ))}
+          {displayedCoins < filteredCoins.length && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <Button variant="contained" onClick={handleLoadMore} sx={{ backgroundColor: 'purple', marginBottom: '10px' }}>
+                Load More
+              </Button>
+            </Box>
+          )}
         </Box>
       </Box>
     </>
